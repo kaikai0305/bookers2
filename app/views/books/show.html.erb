@@ -1,19 +1,41 @@
-<div class="col-md-8 offset-md-1">
-  		<h2>Book detail</h2>
-  		<table class="table">
-  		  <tbody><tr>
-          <td><a href="/users/65990">
-            <img class="attachment user profile_image fallback" src="/assets/no-image-icon-d3f9e11cb2bb284b42e0810f94b03c50126f51f482ea43054b87c2b7ebaa01d5.jpg"><br>
-</a>          </td>
-          <td><a href="/books/52061">3</a></td>
-          <td>3</td>
-        </tr>
-      </tbody></table>
+
+<div class="row mx-auto">
+ <div class="col-md-3">
+  <%= render 'users/user_info', user: @user %>
+ </div>
 
 
-<%= link_to "Edit", edit_book_path(@book.id) %>
-<% if @book.user == current_user %>
-  <%= link_to "Destroy", destroy_book_path(@book.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+ <div class="col-md-8 offset-md-1">
+  <h2>Book detail</h2>
+  <table class="table">
+   <thead>
+      <th></th>
+      <th>Title</th>
+      <th>Opinion</th>
+      <th colspan="3"></th>
+   </thead>
+   <tbody>
+     <td>
+      <% if @book.user.profile_image.attached? %>
+      <%=image_tag @book.user.profile_image,size: "100x100" %>
+      <% else %>
+       <%= image_tag 'no_image', size: "100x100" %>
+      <% end %>
+      </td>
+      <td>
+       <%= link_to @book.title, book_path(@book) %>
+       </td>
+      <td><%= @book.body %> </td>
+      <td>
+        <% if @book.user == current_user %>
+         <%= link_to "Edit", edit_book_path(@book.id) %>
+         <%= link_to "Destroy",book_path(@book.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+        <% end %>
+      </td>
+    </tbody>
+ </table>
 
-  <% end %>
+
+
+ </div>
 </div>
