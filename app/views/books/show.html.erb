@@ -1,6 +1,13 @@
 
 <div class="row mx-auto">
  <div class="col-md-3">
+
+  <% if flash[:notice] %>
+    <p id="notice">
+  <%= flash[:notice] %>
+    </p>
+  <% end %>
+
   <%= render 'users/user_info', user: @user %>
  </div>
 
