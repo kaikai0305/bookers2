@@ -11,7 +11,7 @@
         <% end %>
         </ul>
        <% end %>
-       <%= render 'users/user_info', user: @user %>
+       <%= render 'users/user_info', user: @user,book: @book %>
       </div>
 
 
@@ -29,10 +29,15 @@
             <% @books.each do |book| %>
             <tr>
             <td>
-            <% if book.user.profile_image.attached? %>
-            <%=image_tag book.user.profile_image,size: "100x100" %>
-            <% else %>
-             <%= image_tag 'no_image', size: "100x100" %>
+
+             <% if book.user.profile_image.attached? %>
+              <%= link_to user_path(book.user) do %>
+              <%= image_tag book.user.profile_image,size: "100x100" %>
+             <% end %>
+             <% else %>
+             <%= link_to user_path (book.user) do %>
+             <%= image_tag 'no_image',size: "100x100" %>
+             <% end %>
             <% end %>
             </td>
             <td>
